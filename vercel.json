@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "src/static/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "headers": {
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization, Content-Type"
+      },
+      "continue": true
+    },
+    { "src": "/api/status", "dest": "/api/status.py" },
+    { "src": "/api/notes/generate", "dest": "/api/generate.py" },
+    { "src": "/api/notes", "dest": "/api/notes.py" },
+    { "src": "/api/notes/(.*)", "dest": "/api/notes.py" },
+    { "src": "/api/hello", "dest": "/api/hello.py" },
+    { "src": "/", "dest": "/api/index.py" },
+    { "src": "/(.*)", "dest": "/api/index.py" }
+  ]
+}

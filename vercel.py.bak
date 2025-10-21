@@ -1,0 +1,5 @@
+from src.main import app
+
+# This file is the entry point for Vercel Python serverless functions
+# Vercel will look for a callable named 'handler'
+handler = app.wsgi_app
